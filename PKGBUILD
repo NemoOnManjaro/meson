@@ -4,7 +4,7 @@
 
 pkgname=meson
 pkgver=1.6.0
-pkgrel=4
+pkgrel=5
 pkgdesc="High productivity build system"
 url="https://mesonbuild.com/"
 arch=(any)
@@ -77,6 +77,7 @@ source=(
   cross-lib32
   native-clang
   0001-Skip-broken-tests.patch
+  0002-tests-Avoid-modifying-test-dirs-in-allplatformtests.patch
   fix-cmake.diff
   fix-gir.diff
 )
@@ -88,6 +89,7 @@ b2sums=('c1d8f143b17fab90c6128a721ac45b9ed6b85d67272149058e74ab827822b6f2c84ebdc
         '9b16477aa77a706492e26fb3ad42e90674b8f0dfe657dd3bd9ba044f921be12ceabeb0050a50a15caee4d999e1ec33ed857bd3bed9e4444d73bb4a4f06381081'
         '7d88929d5a3b49d91c5c9969f19d9b47f3151706526b889515acaeda0141257d5115875ac84832e9ea46f83a7700d673adcc5db84b331cd798c70ae6e90eac1e'
         'f23df4324b30b81f1756a9b443dd35185c4e8717b31fafcd2479071b6f38a8ee0776e97a3cd21a7921a6da892685a45632f6f8282007123b2dd5745492768f54'
+        '9202300b5ddac7017fdc1865a4e4298f606d39e39ccb379284de998decc621491761804bb88f7e1b2cd8893e5f8f7300f3b37f305ef3cbad40ee4693418e8167'
         '8e75e4f6cac65cef19dade915528d05fedecf83586c482db17ebe1ed6399f1539fa74687fb7dad9747b8d2b2ca2fcfe89af049e19aedf489d34de93aec61dcbb'
         '8f00fa21777fe012b6e3cb880b0442ba9074d90ab8a2c7b7c67e8c69e418ef0625a047f372f68c43b775f95c36f9119d6997fd337f2296b036e89e306346abbd')
 validpgpkeys=(
@@ -99,6 +101,7 @@ prepare() {
 
   # Pass tests
   patch -Np1 -i ../0001-Skip-broken-tests.patch
+  patch -Np1 -i ../0002-tests-Avoid-modifying-test-dirs-in-allplatformtests.patch
 
   # Unbreak CMake
   # https://github.com/mesonbuild/meson/issues/13888
