@@ -1,0 +1,34 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: "Jan Alexander Steffens (heftig)" <heftig@archlinux.org>
+Date: Mon, 9 Dec 2024 16:18:50 +0100
+Subject: [PATCH] tests: Avoid modifying '17 prebuild shared' test dir
+
+Tests can tread on each other's toes when parallelism is high enough.
+
+In this case, `test_prebuilt_shared_lib` creates an object file in the
+`17 prebuilt shared` test dir.
+
+`test_prebuilt_shared_lib_rpath_same_prefix` uses `shutil.copytree` to
+copy that same test dir to a temporary location.
+
+If the former test cleans up its object file while `copytree` is
+running, the copy can fail with a fatal ENOENT `shutil.Error`.
+
+Use `copy_srcdir` to prevent this from happening.
+---
+ unittests/allplatformstests.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/unittests/allplatformstests.py b/unittests/allplatformstests.py
+index cadbc40e9680..4279039582d9 100644
+--- a/unittests/allplatformstests.py
++++ b/unittests/allplatformstests.py
+@@ -1766,7 +1766,7 @@ class AllPlatformTests(BasePlatformTests):
+ 
+     def test_prebuilt_shared_lib(self):
+         (cc, _, object_suffix, shared_suffix) = self.detect_prebuild_env()
+-        tdir = os.path.join(self.unit_test_dir, '17 prebuilt shared')
++        tdir = self.copy_srcdir(os.path.join(self.unit_test_dir, '17 prebuilt shared'))
+         source = os.path.join(tdir, 'alexandria.c')
+         objectfile = os.path.join(tdir, 'alexandria.' + object_suffix)
+         impfile = os.path.join(tdir, 'alexandria.lib')

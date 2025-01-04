@@ -77,7 +77,7 @@ source=(
   cross-lib32
   native-clang
   0001-Skip-broken-tests.patch
-  0002-tests-Avoid-modifying-test-dirs-in-allplatformtests.patch
+  0002-tests-Avoid-modifying-17-prebuild-shared-test-dir.patch
 )
 b2sums=('7ccdb3bf3f701fc787fabf91413db8301a8658b89e08c1d712711bd35845dc2468211e4b666cf46ad68ad9462e62b12b62d60c3767a2804f9b695b4390bb8235'
         'SKIP'
@@ -87,7 +87,7 @@ b2sums=('7ccdb3bf3f701fc787fabf91413db8301a8658b89e08c1d712711bd35845dc2468211e4
         '9b16477aa77a706492e26fb3ad42e90674b8f0dfe657dd3bd9ba044f921be12ceabeb0050a50a15caee4d999e1ec33ed857bd3bed9e4444d73bb4a4f06381081'
         '7d88929d5a3b49d91c5c9969f19d9b47f3151706526b889515acaeda0141257d5115875ac84832e9ea46f83a7700d673adcc5db84b331cd798c70ae6e90eac1e'
         '41b5d1fea3ef014b9c52f292bf35bf87f589909a4de316ca324fb717f997a36cfc7bcd82c6f18039ea066131cd630381d275984fb9f3462d468a93d1ca437b2d'
-        '9202300b5ddac7017fdc1865a4e4298f606d39e39ccb379284de998decc621491761804bb88f7e1b2cd8893e5f8f7300f3b37f305ef3cbad40ee4693418e8167')
+        '9f62ffc6038739eeb3f1b76463e6b37363d1439dcf7a5878764fcb52ce54d16bb2f1ab9c590ba348196d7c5455aa5912240124df448ca4724de9896edc56c33a')
 validpgpkeys=(
   19E2D6D9B46D8DAA6288F877C24E631BABB1FE70  # Jussi Pakkanen <jpakkane@gmail.com>
 )
@@ -97,7 +97,9 @@ prepare() {
 
   # Pass tests
   patch -Np1 -i ../0001-Skip-broken-tests.patch
-  patch -Np1 -i ../0002-tests-Avoid-modifying-test-dirs-in-allplatformtests.patch
+
+  # https://github.com/mesonbuild/meson/pull/13991
+  patch -Np1 -i ../0002-tests-Avoid-modifying-17-prebuild-shared-test-dir.patch
 }
 
 build() {
