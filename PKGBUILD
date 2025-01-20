@@ -3,7 +3,7 @@
 # Contributor: Anatol Pomozov <anatol dot pomozov at gmail>
 
 pkgname=meson
-pkgver=1.6.1
+pkgver=1.7.0rc1
 pkgrel=1
 pkgdesc="High productivity build system"
 url="https://mesonbuild.com/"
@@ -77,17 +77,15 @@ source=(
   cross-lib32
   native-clang
   0001-Skip-broken-tests.patch
-  0002-tests-Avoid-modifying-17-prebuild-shared-test-dir.patch
 )
-b2sums=('7ccdb3bf3f701fc787fabf91413db8301a8658b89e08c1d712711bd35845dc2468211e4b666cf46ad68ad9462e62b12b62d60c3767a2804f9b695b4390bb8235'
+b2sums=('eb17bc0bd1bf5ba48ab973c3d093184524f3d0afdb14ed403026dc9dfef956abf1b1a8a434071ad4db02b1bcc0f636ffb504aed68e61f95fad7e92496d337504'
         'SKIP'
-        '55df822192781a70e4bc44cfe14fb363e3f820406260ca9705d7fdb5fad1bf0117e3f1325d37e58e23477bc075ab6bd84056409355ec694f72eeaa5bf982ecc7'
-        'ba2e37d7cf18adfefbff230f140b702b87b22ee409de9dc5407afbe153b90cb66ab6d4063c4b4ce72cbcef2db84288981d52c47698fc7cc2e181924be651c0fa'
+        'a2615149175714f74d7ea1be426ce23475fa479d4f3ed4e9000b7bee46e15e7f1592d777334385d8858dedf3aa4256bcfaabf5f60150aa0854be6f67ad99ed59'
+        '561c60eebdc1a6274c1d557addf927672097fdb3630a5148583077466cf19d2031348a4e0e22b095dc91b750b94b04d00e983f1518001bbc3c4b97747d7e1662'
         '70f042a7603d1139f6cef33aec028da087cacabe278fd47375e1b2315befbfde1c0501ad1ecc63d04d31b232a04f08c735d61ce59d7244521f3d270e417fb5af'
         '9b16477aa77a706492e26fb3ad42e90674b8f0dfe657dd3bd9ba044f921be12ceabeb0050a50a15caee4d999e1ec33ed857bd3bed9e4444d73bb4a4f06381081'
         '7d88929d5a3b49d91c5c9969f19d9b47f3151706526b889515acaeda0141257d5115875ac84832e9ea46f83a7700d673adcc5db84b331cd798c70ae6e90eac1e'
-        '41b5d1fea3ef014b9c52f292bf35bf87f589909a4de316ca324fb717f997a36cfc7bcd82c6f18039ea066131cd630381d275984fb9f3462d468a93d1ca437b2d'
-        '9f62ffc6038739eeb3f1b76463e6b37363d1439dcf7a5878764fcb52ce54d16bb2f1ab9c590ba348196d7c5455aa5912240124df448ca4724de9896edc56c33a')
+        '076f1650bf889b79a390da82e2e0a3d3b14e3383cdf4cd81ee06d7b776e070bb3d681295926828af123c16f950ab5cca127236f3030124fa9e8c7787a2c98297')
 validpgpkeys=(
   19E2D6D9B46D8DAA6288F877C24E631BABB1FE70  # Jussi Pakkanen <jpakkane@gmail.com>
 )
@@ -97,9 +95,6 @@ prepare() {
 
   # Pass tests
   patch -Np1 -i ../0001-Skip-broken-tests.patch
-
-  # https://github.com/mesonbuild/meson/pull/13991
-  patch -Np1 -i ../0002-tests-Avoid-modifying-17-prebuild-shared-test-dir.patch
 }
 
 build() {
