@@ -3,7 +3,7 @@
 # Contributor: Anatol Pomozov <anatol dot pomozov at gmail>
 
 pkgname=meson
-pkgver=1.7.0rc1
+pkgver=1.7.0rc2
 pkgrel=1
 pkgdesc="High productivity build system"
 url="https://mesonbuild.com/"
@@ -16,9 +16,12 @@ depends=(
   python-tqdm
 )
 makedepends=(
+  git
+  python-aiohttp
   python-build
   python-installer
   python-setuptools
+  python-strictyaml
   python-wheel
 )
 checkdepends=(
@@ -70,18 +73,13 @@ checkdepends=(
   wxgtk3
 )
 source=(
-  https://github.com/mesonbuild/meson/releases/download/$pkgver/meson-$pkgver.tar.gz{,.asc}
-  meson-reference-$pkgver.3::https://github.com/mesonbuild/meson/releases/download/$pkgver/meson-reference.3
-  meson-reference-$pkgver.json::https://github.com/mesonbuild/meson/releases/download/$pkgver/reference_manual.json
+  "git+https://github.com/mesonbuild/meson?signed#tag=$pkgver"
   arch-meson
   cross-lib32
   native-clang
   0001-Skip-broken-tests.patch
 )
-b2sums=('eb17bc0bd1bf5ba48ab973c3d093184524f3d0afdb14ed403026dc9dfef956abf1b1a8a434071ad4db02b1bcc0f636ffb504aed68e61f95fad7e92496d337504'
-        'SKIP'
-        'a2615149175714f74d7ea1be426ce23475fa479d4f3ed4e9000b7bee46e15e7f1592d777334385d8858dedf3aa4256bcfaabf5f60150aa0854be6f67ad99ed59'
-        '561c60eebdc1a6274c1d557addf927672097fdb3630a5148583077466cf19d2031348a4e0e22b095dc91b750b94b04d00e983f1518001bbc3c4b97747d7e1662'
+b2sums=('1eb251182f8d1ae36759f21630866e32097b04b3b1b6112cc26e79b5f336954c0f95b9d809ee4720114e46c42ff90f342fdf479cc12d484bfe9555656c815998'
         '70f042a7603d1139f6cef33aec028da087cacabe278fd47375e1b2315befbfde1c0501ad1ecc63d04d31b232a04f08c735d61ce59d7244521f3d270e417fb5af'
         '9b16477aa77a706492e26fb3ad42e90674b8f0dfe657dd3bd9ba044f921be12ceabeb0050a50a15caee4d999e1ec33ed857bd3bed9e4444d73bb4a4f06381081'
         '7d88929d5a3b49d91c5c9969f19d9b47f3151706526b889515acaeda0141257d5115875ac84832e9ea46f83a7700d673adcc5db84b331cd798c70ae6e90eac1e'
@@ -91,35 +89,37 @@ validpgpkeys=(
 )
 
 prepare() {
-  cd $pkgname-$pkgver
+  cd meson
 
   # Pass tests
   patch -Np1 -i ../0001-Skip-broken-tests.patch
 }
 
 build() {
-  cd $pkgname-$pkgver
+  cd meson
   python -m build --wheel --no-isolation
+  ./meson.py setup docs docs.build --prefix /usr -D html=false
+  ./meson.py compile -C docs.build
 }
 
 check() (
-  cd $pkgname-$pkgver
+  cd meson
   export LC_CTYPE=en_US.UTF-8 CPPFLAGS= CFLAGS= CXXFLAGS= LDFLAGS=
   ./run_tests.py --failfast
 )
 
 package() {
-  cd $pkgname-$pkgver
+  cd meson
   python -m installer --destdir="$pkgdir" dist/*.whl
+
+  ./meson.py install -C docs.build --destdir "$pkgdir"
+  install -Dm644 docs.build/reference_manual.json -t "$pkgdir/usr/share/doc/$pkgname"
 
   install -d "$pkgdir/usr/share/vim/vimfiles"
   cp -rt "$pkgdir/usr/share/vim/vimfiles" data/syntax-highlighting/vim/*/
 
   install -Dm644 data/shell-completions/bash/* -t "$pkgdir/usr/share/bash-completion/completions"
   install -Dm644 data/shell-completions/zsh/*  -t "$pkgdir/usr/share/zsh/site-functions"
-
-  install -Dm644 ../meson-reference-$pkgver.3    "$pkgdir/usr/share/man/man3/meson-reference.3"
-  install -Dm644 ../meson-reference-$pkgver.json "$pkgdir/usr/share/doc/$pkgname/reference_manual.json"
 
   install -D ../arch-meson -t "$pkgdir/usr/bin"
 
