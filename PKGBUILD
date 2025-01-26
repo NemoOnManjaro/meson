@@ -3,7 +3,7 @@
 # Contributor: Anatol Pomozov <anatol dot pomozov at gmail>
 
 pkgname=meson
-pkgver=1.7.0rc2
+pkgver=1.7.0
 pkgrel=1
 pkgdesc="High productivity build system"
 url="https://mesonbuild.com/"
@@ -50,6 +50,7 @@ checkdepends=(
   java-environment=8
   ldc
   libelf
+  libpcap
   libwmf
   llvm
   mercurial
@@ -63,6 +64,9 @@ checkdepends=(
   python-pytest-xdist
   qt5-base
   qt5-tools
+  qt6-base
+  qt6-declarative
+  qt6-tools
   rust
   rust-bindgen
   sdl2
@@ -79,7 +83,7 @@ source=(
   native-clang
   0001-Skip-broken-tests.patch
 )
-b2sums=('1eb251182f8d1ae36759f21630866e32097b04b3b1b6112cc26e79b5f336954c0f95b9d809ee4720114e46c42ff90f342fdf479cc12d484bfe9555656c815998'
+b2sums=('2969a68dced75e7536686e6c13acb19afaf802d8b42a32de28f25d62213b05c1c6b01c843795f71ea3a48ba010b1152db8dd6c69837617da65ebbb7f6df30bc7'
         '70f042a7603d1139f6cef33aec028da087cacabe278fd47375e1b2315befbfde1c0501ad1ecc63d04d31b232a04f08c735d61ce59d7244521f3d270e417fb5af'
         '9b16477aa77a706492e26fb3ad42e90674b8f0dfe657dd3bd9ba044f921be12ceabeb0050a50a15caee4d999e1ec33ed857bd3bed9e4444d73bb4a4f06381081'
         '7d88929d5a3b49d91c5c9969f19d9b47f3151706526b889515acaeda0141257d5115875ac84832e9ea46f83a7700d673adcc5db84b331cd798c70ae6e90eac1e'
