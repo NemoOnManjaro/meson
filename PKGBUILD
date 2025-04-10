@@ -72,6 +72,7 @@ checkdepends=(
   sdl2
   vala
   valgrind
+  vulkan-headers
   vulkan-validation-layers
   wayland-protocols
   wxgtk3
