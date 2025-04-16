@@ -22,7 +22,7 @@ index 812dcf9c5c19..cb25be2f36bd 100644
  
  dep = dependency('ZLIB', version : '>=1.2', method : 'cmake')
 diff --git a/unittests/linuxliketests.py b/unittests/linuxliketests.py
-index 90387f5ebd39..f714b6badf18 100644
+index db7068d5b03f..c12dda3fbc1f 100644
 --- a/unittests/linuxliketests.py
 +++ b/unittests/linuxliketests.py
 @@ -313,6 +313,7 @@ class LinuxlikeTests(BasePlatformTests):
