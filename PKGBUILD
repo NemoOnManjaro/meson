@@ -3,7 +3,7 @@
 # Contributor: Anatol Pomozov <anatol dot pomozov at gmail>
 
 pkgname=meson
-pkgver=1.8.0rc1
+pkgver=1.8.0rc2
 pkgrel=1
 pkgdesc="High productivity build system"
 url="https://mesonbuild.com/"
@@ -45,6 +45,7 @@ checkdepends=(
   gtk-sharp-2
   gtk3
   gtkmm3
+  hdf5
   hotdoc
   itstool
   java-environment=8
@@ -88,11 +89,11 @@ source=(
   native-clang
   0001-Skip-broken-tests.patch
 )
-b2sums=('49b68dc71c0ac8ca8589cc0b48cf381265f0e25f01085f79e68878e00daf70a13fcea1f2ed5cd0c3349657e7745211e29f47f2f01192456d27b624ba1da7d5af'
+b2sums=('e74cb51cdaef86741917430190a832d0f786c37984e59e403d0fbc4072eda53f80bded35a26fcc12c442d63c4157644f31edcd31fc0cd7099f757a09928aa315'
         '70f042a7603d1139f6cef33aec028da087cacabe278fd47375e1b2315befbfde1c0501ad1ecc63d04d31b232a04f08c735d61ce59d7244521f3d270e417fb5af'
         '9b16477aa77a706492e26fb3ad42e90674b8f0dfe657dd3bd9ba044f921be12ceabeb0050a50a15caee4d999e1ec33ed857bd3bed9e4444d73bb4a4f06381081'
         '7d88929d5a3b49d91c5c9969f19d9b47f3151706526b889515acaeda0141257d5115875ac84832e9ea46f83a7700d673adcc5db84b331cd798c70ae6e90eac1e'
-        '7a970e99e8c74bb79fe7f97c5e2cddbc940975d7c03a587cd60dd56c598bb58ffcd034c9072fa446ae9555ea11e9f7b7cb7f999465371466c819681561e9c7dc')
+        '04967f4c00790e3b5ccf582ad7d3bb665897a44017eac2b7bc3edbe3156ec076d3dfea51a9015e74a12fb42bff331d427e36d9b5a201882893337b74d2110cef')
 validpgpkeys=(
   19E2D6D9B46D8DAA6288F877C24E631BABB1FE70 # Jussi Pakkanen <jpakkane@gmail.com>
   BD27B07A5EF45C2ADAF70E0484818A6819AF4A9B # Eli Schwartz <eschwartz93@gmail.com>
