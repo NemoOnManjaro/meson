@@ -3,7 +3,7 @@
 # Contributor: Anatol Pomozov <anatol dot pomozov at gmail>
 
 pkgname=meson
-pkgver=1.8.0rc2
+pkgver=1.8.0
 pkgrel=1
 pkgdesc="High productivity build system"
 url="https://mesonbuild.com/"
@@ -89,7 +89,7 @@ source=(
   native-clang
   0001-Skip-broken-tests.patch
 )
-b2sums=('e74cb51cdaef86741917430190a832d0f786c37984e59e403d0fbc4072eda53f80bded35a26fcc12c442d63c4157644f31edcd31fc0cd7099f757a09928aa315'
+b2sums=('5ef3c42c92ae59886886aa9777c718b510b419def7c6dd9ecca4bece3c22a2c387712b6bc78477d6e55c4666270dfdbfd67f22b33d9f3edc4232b8d8f95473e5'
         '70f042a7603d1139f6cef33aec028da087cacabe278fd47375e1b2315befbfde1c0501ad1ecc63d04d31b232a04f08c735d61ce59d7244521f3d270e417fb5af'
         '9b16477aa77a706492e26fb3ad42e90674b8f0dfe657dd3bd9ba044f921be12ceabeb0050a50a15caee4d999e1ec33ed857bd3bed9e4444d73bb4a4f06381081'
         '7d88929d5a3b49d91c5c9969f19d9b47f3151706526b889515acaeda0141257d5115875ac84832e9ea46f83a7700d673adcc5db84b331cd798c70ae6e90eac1e'
