@@ -17,6 +17,9 @@ path = [
     "*.timer",
     "*.desktop",
     "*.hook",
+    "arch-meson",
+    "cross-*",
+    "native-*",
 ]
 SPDX-FileCopyrightText = "Arch Linux contributors"
 SPDX-License-Identifier = "0BSD"
