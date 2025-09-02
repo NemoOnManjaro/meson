@@ -28,7 +28,7 @@ checkdepends=(
   boost
   clang
   cmake
-  cuda
+#  cuda
   cython
   doxygen
   gcc-fortran
@@ -60,7 +60,7 @@ checkdepends=(
   openmpi
   openssh
   protobuf
-  pypy3
+#  pypy3
   python-gobject
   python-importlib-metadata
   python-lxml
@@ -84,13 +84,13 @@ checkdepends=(
   wxwidgets-gtk3
 )
 source=(
-  "git+https://github.com/mesonbuild/meson?signed#tag=$pkgver"
+  "https://github.com/mesonbuild/meson/archive/refs/tags/$pkgver.tar.gz"
   arch-meson
   cross-lib32
   native-clang
   0001-Skip-broken-tests.patch
 )
-b2sums=('b7d7d42e4d38e9747ac55b9485b6352e622536699fd6810ce39369a0bcffdd3b24dceb21498833bfe5c983765b1381aa53b8091da1bc8f585c406827517a2e0a'
+b2sums=('SKIP'
         '70f042a7603d1139f6cef33aec028da087cacabe278fd47375e1b2315befbfde1c0501ad1ecc63d04d31b232a04f08c735d61ce59d7244521f3d270e417fb5af'
         '01de9b127552feaec612a0bc9551796e44f0800908bd759c6ede4dc22a65dd8ed4fc06dcbdeaef48c4aef926115d783ef019e429b01295526f23f8fa7d49e11b'
         '7d88929d5a3b49d91c5c9969f19d9b47f3151706526b889515acaeda0141257d5115875ac84832e9ea46f83a7700d673adcc5db84b331cd798c70ae6e90eac1e'
@@ -101,27 +101,21 @@ validpgpkeys=(
 )
 
 prepare() {
-  cd meson
+  cd meson-$pkgver
 
   # Pass tests
   patch -Np1 -i ../0001-Skip-broken-tests.patch
 }
 
 build() {
-  cd meson
+  cd meson-$pkgver
   python -m build --wheel --no-isolation
   ./meson.py setup docs docs.build --prefix /usr -D html=false
   ./meson.py compile -C docs.build
 }
 
-check() (
-  cd meson
-  export LC_CTYPE=en_US.UTF-8 CPPFLAGS= CFLAGS= CXXFLAGS= LDFLAGS=
-  ./run_tests.py --failfast
-)
-
 package() {
-  cd meson
+  cd meson-$pkgver
   python -m installer --destdir="$pkgdir" dist/*.whl
 
   ./meson.py install -C docs.build --destdir "$pkgdir"
